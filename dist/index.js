@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const path_1 = __importDefault(require("path"));
+const studentRepository_1 = require("./repositories/studentRepository");
+const studentController_1 = require("./controllers/studentController");
+const studentService_1 = require("./services/studentService");
+const app = (0, express_1.default)();
+const port = 3000;
+app.use(body_parser_1.default.json());
+app.use(express_1.default.static(path_1.default.join(__dirname, '..', 'public')));
+const studentRepository = new studentRepository_1.StudentRepository();
+const StudentService = new studentService_1.studentService(studentRepository);
+const studentController = new studentController_1.studentControler(StudentService);
+app.post("/students", studentController.createStudent);
+app.get("/students", studentController.getAllStudents);
+app.get("/students/:id", studentController.getStudentById);
+app.put("/students/:id", studentController.updateStudent);
+app.delete("/students/:id", studentController.deleteStudent);
+app.listen(port, () => console.log(`Server running on port ${port}`));
