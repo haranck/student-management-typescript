@@ -2,9 +2,9 @@ import express from "express"
 import bodyParser from "body-parser"
 import path from 'path';
 
-import { StudentRepository } from "./repositories/studentRepository"
-import { studentControler } from "./controllers/studentController"
-import { studentService } from "./services/studentService"
+import { StudentRepository, IStudentRepository } from "./repositories/studentRepository"
+import { studentControler, IStudentController } from "./controllers/studentController"
+import { studentService, IStudentService } from "./services/studentService"
 
 const app = express()
 const port = 3000
@@ -12,9 +12,9 @@ const port = 3000
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-const studentRepository  = new StudentRepository()
-const StudentService = new studentService(studentRepository)
-const studentController = new studentControler(StudentService)
+const studentRepository: IStudentRepository  = new StudentRepository()
+const StudentService: IStudentService = new studentService(studentRepository)
+const studentController: IStudentController = new studentControler(StudentService)
 
 app.post("/students",studentController.createStudent)
 app.get("/students",studentController.getAllStudents)

@@ -1,6 +1,14 @@
 import { Student } from "../models/studentmodel";
 
-export class StudentRepository {
+export interface IStudentRepository {
+    addStudent(student: Omit<Student, "id">): Student;
+    getAllStudents(): Student[];
+    getStudentById(id: number): Student | undefined;
+    updateStudent(id: number, updateData: Partial<Omit<Student, "id">>): Student | null;
+    deleteStudent(id: number): boolean;
+}
+
+export class StudentRepository implements IStudentRepository {
     private students: Student[] = []
     private nextId = 1
 

@@ -1,8 +1,16 @@
 import { Request, Response } from "express";
-import { studentService } from "../services/studentService";
+import { studentService, IStudentService } from "../services/studentService";
 
-export class studentControler {
-    constructor(private Studentservice: studentService) { }
+export interface IStudentController {
+    createStudent(req: Request, res: Response): void;
+    getAllStudents(req: Request, res: Response): void;
+    getStudentById(req: Request, res: Response): void;
+    updateStudent(req: Request, res: Response): void;
+    deleteStudent(req: Request, res: Response): void;
+}
+
+export class studentControler implements IStudentController {
+    constructor(private Studentservice: IStudentService) { }
 
     createStudent = (req: Request, res: Response): void => {
         try {

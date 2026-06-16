@@ -1,8 +1,16 @@
-import { StudentRepository } from '../repositories/studentRepository'
+import { StudentRepository, IStudentRepository } from '../repositories/studentRepository'
 import { Student } from '../models/studentmodel'
 
-export class studentService {
-    constructor(private studentRepo: StudentRepository) {}
+export interface IStudentService {
+    createStudent(data: Omit<Student, "id">): Student;
+    getAllStudents(): Student[];
+    getStudentByid(id: number): Student | undefined;
+    updateStudent(id: number, updateData: Partial<Omit<Student, "id">>): Student | null;
+    deleteStudent(id: number): boolean;
+}
+
+export class studentService implements IStudentService {
+    constructor(private studentRepo: IStudentRepository) {}
 
     createStudent(data: Omit<Student, "id">): Student {
         if (!data.name || !data.age || !data.course) {
