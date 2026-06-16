@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Student-Management-Typescript
-this project i building for  understanding of the repository architecture  just like a crud operations in this project using typescript oops principle 
-=======
 # Student Management System – TypeScript 🎓
 
 This project is a **Student Management System** built using **TypeScript**, created to understand and practice **CRUD operations**, **Object-Oriented Programming (OOP) principles**, and clean repository architecture.
@@ -43,4 +39,3 @@ The main goal of this project is learning and improving TypeScript fundamentals 
 - Project architecture best practices
 
 ---
->>>>>>> 6eecad6b0b70fdfade779f6143f640fe078830a3
